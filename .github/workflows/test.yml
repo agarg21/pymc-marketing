@@ -64,6 +64,8 @@ jobs:
           OLDEST=$(grep '"pymc>=' pyproject.toml | head -1 | sed 's/.*>=//' | sed 's/[",].*//')
           uv run --no-sync --frozen python -c "import pymc; assert pymc.__version__ == '${OLDEST}', pymc.__version__"
       - name: Run tests
+        env:
+          COVERAGE_CORE: sysmon
         run: |
           uv run --no-sync --frozen pytest --splits 6 \
                  --group ${{ matrix.group }} \
@@ -97,6 +99,8 @@ jobs:
           sudo apt-get install graphviz graphviz-dev
           uv pip install -e .[test]
       - name: Run tests
+        env:
+          COVERAGE_CORE: sysmon
         run: |
           uv run pytest --only-slow \
                  --splits 2 \
