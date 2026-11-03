@@ -118,3 +118,4 @@ jobs:
       - name: Check build matrix status
         if: ${{ !contains(fromJSON('["success", "skipped"]'), needs.test.result) || !contains(fromJSON('["success", "skipped"]'), needs.test_slow.result) }}
         run: exit 1
+# fork-only: registers the workflow after enabling Actions
